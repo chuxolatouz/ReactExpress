@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+eslint src features
+cucumber.js
