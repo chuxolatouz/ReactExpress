@@ -1,16 +1,19 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
 
+import 'bootstrap/dist/css/bootstrap.css';
 import App from './components/App';
 import About from './components/About';
 import NotFound from './components/NotFound';
 import Login from './components/Login'
+import Rooms from './components/Rooms'
 
 const Routes = (props) => (
   <Router {...props}>
+    <Route path="/about" component={About} />
     <Route path="/login" component={Login}/>
     <Route path="/" component={App} />
-    <Route path="/about" component={About} />
+    <Route path="/rooms" component={Rooms} />
     <Route path="*" component={NotFound} />
   </Router>
 );

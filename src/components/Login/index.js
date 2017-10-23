@@ -1,21 +1,53 @@
-import React, { PropTypes, Component } from 'react';
-import classnames from 'classnames';
-
+import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import './style.css';
 
-export default class Login extends Component {
-  // static propTypes = {}
-  // static defaultProps = {}
-  // state = {}
+class Login extends Component {
+  constructor(){
+    super()
+    this.state = {
+      email: '',
+      password: '',
+    }
+    this.formValidator = this.formValidator.bind(this)
+  }
+
+  static validateEmail = (email) => {
+    console.log(email);
+
+  }
+
+  formValidator() {
+    browserHistory.push({ pathname: '/rooms'})
+  }
 
   render() {
-    const { className, ...props } = this.props;
     return (
-      <div className={classnames('Login', className)} {...props}>
-        <h1>
-          Login
-        </h1>
+      <div className="container">
+        <div className="login text-center">
+          <h1>
+            Login
+          </h1>
+          <div className="form">
+            <TextField
+              onChange={ e => { this.setState({ email: e.target.value})}}
+              hintText="example@tektonlabs"
+              floatingLabelText="Email"
+              />
+            <br/>
+            <TextField
+              hintText="Password Field"
+              floatingLabelText="Password"
+              type="password"
+              />
+          </div>
+          <RaisedButton label="Go" onClick={this.formValidator} />
+        </div>
       </div>
     );
   }
 }
+
+export default Login
