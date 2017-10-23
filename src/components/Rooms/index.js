@@ -3,15 +3,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchRooms } from '../../actions/index';
 
+import CreateRoom from './CreateRoom'
 import './style.css';
 
 class Rooms extends Component {
   // static propTypes = {}
   // static defaultProps = {}
   // state = {}
-  async componentWillMount() {
-    await this.props.fetchRooms()
-  }
+  // async componentWillMount() {
+  //   await this.props.fetchRooms()
+  // }
 
   render() {
 
@@ -20,6 +21,24 @@ class Rooms extends Component {
         <h1>
           Rooms
         </h1>
+        <span>
+          Rooms detail
+        </span>
+        {this.props.rooms.map( item => {
+          return (
+          <div className="room-details" key={`${item.name}-${item.capacity}`}>
+          <div className='name'>
+            <span>
+              {item.name}
+            </span>
+          </div>
+          <div className="capacity">
+            {item.capacity}
+          </div>
+        </div>)
+        })}
+        <CreateRoom />
+
       </div>
     );
   }

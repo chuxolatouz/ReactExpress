@@ -10,17 +10,32 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      error: ''
     }
     this.formValidator = this.formValidator.bind(this)
   }
 
   static validateEmail = (email) => {
-    console.log(email);
+    // eslint-disable-next-line
+    var splitted = email.match("^(.+)@tektonlabs\.com$");
+    if (splitted == null) return false;
+    if (splitted[1] != null)
+    {
+      // eslint-disable-next-line
+        var regexp_user = /^\"?[\w-_\.]*\"?$/;
+        if (splitted[1].match(regexp_user) == null) return false;
+        return true;
+    }
+    return false;
 
   }
 
   formValidator() {
-    browserHistory.push({ pathname: '/rooms'})
+    if(Login.validateEmail(this.state.email)){
+      browserHistory.push({ pathname: '/rooms'})
+    } else {
+      this.setState({error: 'Invalid tekton email'})
+    }
   }
 
   render() {
@@ -35,6 +50,7 @@ class Login extends Component {
               onChange={ e => { this.setState({ email: e.target.value})}}
               hintText="example@tektonlabs"
               floatingLabelText="Email"
+              errorText={this.state.error}
               />
             <br/>
             <TextField
