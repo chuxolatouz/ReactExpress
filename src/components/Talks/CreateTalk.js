@@ -10,6 +10,7 @@ import {
   DatePicker
 } from 'material-ui'
 import { setTalk, fetchUsers, fetchRooms } from '../../actions/index';
+import Button from '../Buttons'
 
 class CreateTalk extends Component {
   constructor() {
@@ -88,7 +89,15 @@ class CreateTalk extends Component {
         <br />
         <DatePicker hintText="Talk Date" onChange={this.handleDate}/>
         <br />
-        <RaisedButton label="Create" onClick={this.handleClick}/>
+        <div className="row">
+          <div className="col-xs-6">
+            <Button link_to="/users"  label="Back"/>
+          </div>
+          <div className="col-xs-6">
+            <RaisedButton label="Create" onClick={this.handleClick}/>
+          </div>
+        </div>
+
       </div>
     );
   }

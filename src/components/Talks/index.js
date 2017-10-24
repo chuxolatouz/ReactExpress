@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchTalks, fetchUsers, fetchRooms } from '../../actions/index';
-import FontIcon from 'material-ui/FontIcon'
-import {blue500} from 'material-ui/styles/colors';
 import Button from '../Buttons'
+import AssignUser from './assign_user'
 
 class Talks extends Component {
   constructor(){
@@ -20,7 +19,7 @@ class Talks extends Component {
   }
   getUser(userId) {
     if(this.props.users.length){
-      const user = this.props.users.find( x => x._id == userId)
+      const user = this.props.users.find( x => x._id === userId)
       return user.name
     } else {
       return ''
@@ -28,7 +27,7 @@ class Talks extends Component {
   }
   getRoom(roomId) {
     if(this.props.rooms.length){
-      const room = this.props.rooms.find( x => x._id == roomId)
+      const room = this.props.rooms.find( x => x._id === roomId)
       return room.name
     } else {
       return ''
@@ -56,8 +55,8 @@ class Talks extends Component {
               <div className="col-md-2">{item.capacity}</div>
               <div className="col-md-2">{this.getRoom(item.room)}</div>
               <div className="col-md-2">{item.date}</div>
-              <div className="col-md-2">                
-                <a>view_users</a>
+              <div className="col-md-2">
+                <AssignUser talk={item}/>
               </div>
             </div>
           )
