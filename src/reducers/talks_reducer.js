@@ -6,7 +6,7 @@ import {
 export default function(state = [], action) {
   switch (action.type) {
     case FETCH_TALKS:
-      return [ action.payload, ...state ]
+      return action.payload
     case SET_TALK:
       return [ action.payload , ...state ]
 

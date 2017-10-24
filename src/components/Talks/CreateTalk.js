@@ -8,7 +8,7 @@ import {
   SelectField,
   DatePicker
 } from 'material-ui'
-import { setTalk } from '../../actions/index';
+import { setTalk, fetchUsers, fetchRooms } from '../../actions/index';
 
 class CreateTalk extends Component {
   constructor() {
@@ -18,16 +18,21 @@ class CreateTalk extends Component {
       capacity: 0,
       speaker: '',
       date: '',
-
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleRoom = this.handleRoom.bind(this)
     this.handleDate = this.handleDate.bind(this)
   }
+  async componentWillMount() {
+    await this.props.fetchUsers()
+    await this.props.fetchRooms()
+  }
+
   handleClick(){
     this.props.setTalk(this.state)
   }
-  handleRoom = (event,index,value) => {this.setState({value})}
+  handleSpeaker = (event,index,value) => {this.setState({speaker: value})}
+  handleRoom = (event,index,value) => {this.setState({ room: value})}
 
   handleDate = (event, date) => {
     this.setState({ date });
@@ -36,7 +41,7 @@ class CreateTalk extends Component {
 
     return (
       <div className="rooms text-center">
-        <h1>
+        <h1 >
           Create Talk
         </h1>
         <br/>
@@ -47,11 +52,14 @@ class CreateTalk extends Component {
         <br />
         <SelectField
           floatingLabelText="Speaker"
-          value={this.state.room}
-          onChange={this.handleRoom}>
+          value={this.state.speaker}
+          onChange={this.handleSpeaker}>
           {this.props.users.map( (item, index) => {
             return (
-              <MenuItem value={index} primaryText={`${item.name}`} />
+              <MenuItem
+                value={item._id}
+                primaryText={`${item.name}`}
+                key={`${item._id}`}/>
             )
           })}
         </SelectField>
@@ -64,10 +72,14 @@ class CreateTalk extends Component {
         <SelectField
           floatingLabelText="Room"
           value={this.state.room}
+          style={{ textPosition: "left" }}
           onChange={this.handleRoom}>
           {this.props.rooms.map( (item, index) => {
             return (
-              <MenuItem value={index} primaryText={`${item.name}`} />
+              <MenuItem
+                value={item._id}
+                primaryText={`${item.name}`}
+                key={`${item._id}`} />
             )
           })}
         </SelectField>
@@ -85,7 +97,7 @@ function mapStateToProps({ rooms, users }) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({setTalk}, dispatch);
+  return bindActionCreators({setTalk, fetchUsers, fetchRooms}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTalk);
