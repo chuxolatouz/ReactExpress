@@ -8,6 +8,7 @@ import NotFound from './components/NotFound';
 import Login from './components/Login'
 import Rooms from './components/Rooms'
 import Talks from './components/Talks'
+import Users from './components/Users'
 
 const Routes = (props) => (
   <Router {...props}>
@@ -16,6 +17,7 @@ const Routes = (props) => (
     <Route path="/" component={App} />
     <Route path="/rooms" component={Rooms} />
     <Route path="/talks" component={Talks} />
+    <Route path="/users" component={Users} />
     <Route path="*" component={NotFound} />
   </Router>
 );

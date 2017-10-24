@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { TextField, RaisedButton, MenuItem, SelectField } from 'material-ui'
+import {
+  TextField,
+  RaisedButton,
+  MenuItem,
+  SelectField,
+  DatePicker
+} from 'material-ui'
 import { setTalk } from '../../actions/index';
 
 class CreateTalk extends Component {
@@ -11,17 +17,21 @@ class CreateTalk extends Component {
       name: '',
       capacity: 0,
       speaker: '',
+      date: '',
+
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleRoom = this.handleRoom.bind(this)
+    this.handleDate = this.handleDate.bind(this)
   }
   handleClick(){
     this.props.setTalk(this.state)
   }
-  handleRoom(e){
-    console.log(e)
-  }
+  handleRoom = (event,index,value) => {this.setState({value})}
 
+  handleDate = (event, date) => {
+    this.setState({ date });
+  };
   render() {
 
     return (
@@ -61,6 +71,8 @@ class CreateTalk extends Component {
             )
           })}
         </SelectField>
+        <br />
+        <DatePicker hintText="Talk Date" onChange={this.handleDate}/>
         <br />
         <RaisedButton label="Create" onClick={this.handleClick}/>
       </div>
