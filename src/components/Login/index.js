@@ -32,7 +32,8 @@ class Login extends Component {
 
   formValidator() {
     if(Login.validateEmail(this.state.email)){
-      browserHistory.push({ pathname: '/rooms'})
+      sessionStorage.setItem('access', true)
+      browserHistory.push({ pathname: '/'})
     } else {
       this.setState({error: 'Invalid tekton email'})
     }

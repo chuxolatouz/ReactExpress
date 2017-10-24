@@ -9,6 +9,7 @@ export const SET_USER = 'SET_USER'
 
 export async function fetchRooms() {
   const response = await axios.get('http://localhost:4000/rooms')
+  console.log(response.data)
   return {
     type: FETCH_ROOMS,
     payload: response.data
@@ -23,14 +24,11 @@ export async function fetchUsers() {
   }
 }
 
-export function fetchTalks() {
-  const a = {
-    type: 'hi'
-  }
-
+export async function fetchTalks() {
+  const response = await axios.get('http://localhost:4000/talks')
   return {
     type: FETCH_TALKS,
-    payload: a
+    payload: response.data
   }
 }
 
@@ -44,13 +42,13 @@ export async function setUser(data) {
 
 export async function setRoom(data) {
   const response = await axios({
-  method: 'post',
-  url: 'http://localhost:4000/rooms',
-  data: data,
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
+    method: 'post',
+    url: 'http://localhost:4000/rooms',
+    data: data,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
 
   return {
     type: SET_ROOM,

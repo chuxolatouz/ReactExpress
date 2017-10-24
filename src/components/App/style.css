@@ -21,6 +21,16 @@
 .App-intro {
   font-size: large;
 }
+.structure{
+  height: 25%;
+  width: 25%;
+  border: 1px solid blue;
+  padding: 40px;
+  margin: 20px;
+}
+.p-35 {
+  padding-top: 50px;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

@@ -2,23 +2,50 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchUsers } from '../../actions/index';
-import CreateUser from './CreateUser'
 
 class Users extends Component {
+  async componentWillMount(){
+    await this.props.fetchUsers()
+  }
+
   render() {
     return (
-      <div className="Users">
-        <h1>
-          Users
-          <CreateUser />
-        </h1>
+      <div className="container">
+        <h1>Users</h1>
+        <div className="details">users detail</div>
+        <div className="col-md-5">
+          <h3>Name</h3>
+        </div>
+        <div className="col-md-5">
+          <h3>Email</h3>
+        </div>
+        <div className="col-md-2">
+          <h3>type</h3>
+        </div>
+        <div className="container">
+          {this.props.users.map( index => {
+            return (
+              <div className="row" key={index._id}>
+                <div className="col-md-5">
+                  {index.name}
+                </div>
+                <div className="col-md-5">
+                  {index.email}
+                </div>
+                <div className="col-md-2">
+                  {index.type}
+                </div>
+              </div>
+            )
+          })}
+        </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ rooms }) { //weather = state.weather
-  return { rooms };
+function mapStateToProps({ users }) { //weather = state.weather
+  return { users };
 }
 
 function mapDispatchToProps(dispatch) {

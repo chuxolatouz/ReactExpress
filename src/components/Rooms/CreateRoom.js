@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import { TextField, RaisedButton } from 'material-ui'
 import { setRoom } from '../../actions/index';
 
@@ -17,6 +18,7 @@ class CreateRoom extends Component {
   }
   handleClick(){
     this.props.setRoom(this.state)
+    browserHistory.push({ pathname: '/users'})
   }
 
   render() {

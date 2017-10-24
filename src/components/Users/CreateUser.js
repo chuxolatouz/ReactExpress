@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { TextField, RaisedButton, MenuItem, SelectField } from 'material-ui'
 import { setUser } from '../../actions/index';
@@ -11,12 +12,35 @@ class CreateUser extends Component {
       name: '',
       email: '',
       value: 1,
+      password: '',
+      error: ''
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleType = this.handleType.bind(this)
   }
+
+  static validateEmail = (email) => {
+    // eslint-disable-next-line
+    var splitted = email.match("^(.+)@tektonlabs\.com$");
+    if (splitted == null) return false;
+    if (splitted[1] != null)
+    {
+      // eslint-disable-next-line
+        var regexp_user = /^\"?[\w-_\.]*\"?$/;
+        if (splitted[1].match(regexp_user) == null) return false;
+        return true;
+    }
+    return false;
+
+  }
+
   handleClick(){
-    this.props.setUser(this.state)
+    if(CreateUser.validateEmail(this.state.email)){
+      this.props.setUser(this.state)
+      browserHistory.push({pathname: '/users'})
+    } else {
+      this.setState({error: 'invalid tekton email'})
+    }
   }
   handleType= (event, index, value) => this.setState({value});
 
@@ -37,6 +61,13 @@ class CreateUser extends Component {
         <TextField
           onChange={ e => { this.setState({ email: e.target.value})}}
           floatingLabelText="email"
+          errorText={this.state.error}
+          />
+        <br />
+        <TextField
+          onChange={ e => { this.setState({ password: e.target.value})}}
+          floatingLabelText="password"
+          type="password"
           />
         <br />
         <SelectField

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import {
   TextField,
   RaisedButton,
@@ -30,6 +31,7 @@ class CreateTalk extends Component {
 
   handleClick(){
     this.props.setTalk(this.state)
+    browserHistory.push({ pathname: '/talks'})
   }
   handleSpeaker = (event,index,value) => {this.setState({speaker: value})}
   handleRoom = (event,index,value) => {this.setState({ room: value})}

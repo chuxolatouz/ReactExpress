@@ -3,35 +3,41 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchRooms } from '../../actions/index';
 
-import CreateRoom from './CreateRoom'
 import './style.css';
 
 class Rooms extends Component {
-  render() {
+  async componentWillMount() {
+      await this.props.fetchRooms()
+  }
 
+  render() {
     return (
-      <div className="rooms">
-        <h1>
-          Rooms
-        </h1>
-        <span>
-          Rooms detail
-        </span>
+      <div className="container">
+        <h1>Rooms</h1>
+        <span>Rooms detail</span>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4">
+              <h3>Name</h3>
+            </div>
+            <div className="col-md-4">
+              <h3>Capacity</h3>
+            </div>
+          </div>
+        </div>
         {this.props.rooms.map( item => {
           return (
-          <div className="room-details" key={`${item.name}-${item.capacity}`}>
-          <div className='name'>
+          <div className="row room-details" key={`${item.name}-${item.capacity}`}>
+          <div className='col-md-4'>
             <span>
               {item.name}
             </span>
           </div>
-          <div className="capacity">
+          <div className="col-md-4">
             {item.capacity}
           </div>
         </div>)
         })}
-        <CreateRoom />
-
       </div>
     );
   }
