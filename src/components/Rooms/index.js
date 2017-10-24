@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchRooms } from '../../actions/index';
+import Button from '../Buttons'
 
 import './style.css';
 
@@ -38,6 +39,14 @@ class Rooms extends Component {
           </div>
         </div>)
         })}
+        <div className="row">
+          <div className="col-xs-2">
+            <Button link_to="/" label="Main Menu"/>
+          </div>
+          <div className="col-xs-2">
+            <Button link_to="/create_room" label="Create Room"/>
+          </div>
+        </div>
       </div>
     );
   }

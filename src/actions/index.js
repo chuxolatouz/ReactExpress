@@ -9,7 +9,6 @@ export const SET_USER = 'SET_USER'
 
 export async function fetchRooms() {
   const response = await axios.get('http://localhost:4000/rooms')
-  console.log(response.data)
   return {
     type: FETCH_ROOMS,
     payload: response.data

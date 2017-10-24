@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router'
-import logo from './logo.svg';
 import './style.css';
 
 class App extends Component {

@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import isEmpty from 'lodash/isEmpty'
 import { browserHistory } from 'react-router'
 
 export function requireAuthentication(Components) {
@@ -11,14 +9,13 @@ export function requireAuthentication(Components) {
 
     componentWillReceiveProps() {
       this.checkAuth()
-      console.log(this.props);
     }
 
     checkAuth() {
-      if (sessionStorage.getItem('access')) {
-        browserHistory.push({ pathname: '/' })
-      } else {
+      if (!sessionStorage.getItem('access')) {
         browserHistory.push({ pathname: '/login' })
+      } else {
+        browserHistory.push({ pathname: '/' })
       }
     }
 
