@@ -1,5 +1,3 @@
-// import RoomsModel from '../models/rooms'
-// import UsersModel from '../models/user'
 export const FETCH_ROOMS = 'FETCH_ROOMS'
 export const FETCH_USERS = 'FETCH_USERS'
 export const FETCH_TALKS = 'FETCH_TALKS'

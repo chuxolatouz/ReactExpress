@@ -1,13 +1,13 @@
 import {
-  FETCH_TALKS,
-  SET_TALK,
+  FETCH_USERS,
+  SET_USER,
  } from '../actions/index';
 
 export default function(state = [], action) {
   switch (action.type) {
-    case FETCH_TALKS:
+    case FETCH_USERS:
       return [ action.payload, ...state ]
-    case SET_TALK:
+    case SET_USER:
       return [ action.payload , ...state ]
 
   }

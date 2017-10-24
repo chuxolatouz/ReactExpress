@@ -7,13 +7,6 @@ import CreateRoom from './CreateRoom'
 import './style.css';
 
 class Rooms extends Component {
-  // static propTypes = {}
-  // static defaultProps = {}
-  // state = {}
-  // async componentWillMount() {
-  //   await this.props.fetchRooms()
-  // }
-
   render() {
 
     return (

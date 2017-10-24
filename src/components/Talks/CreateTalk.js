@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { TextField, RaisedButton } from 'material-ui'
-import { fetchTalks } from '../../actions/index';
+import { TextField, RaisedButton, MenuItem, SelectField } from 'material-ui'
+import { setTalk } from '../../actions/index';
 
 class CreateTalk extends Component {
   constructor() {
@@ -13,9 +13,13 @@ class CreateTalk extends Component {
       speaker: '',
     }
     this.handleClick = this.handleClick.bind(this)
+    this.handleRoom = this.handleRoom.bind(this)
   }
   handleClick(){
-
+    this.props.setTalk(this.state)
+  }
+  handleRoom(e){
+    console.log(e)
   }
 
   render() {
@@ -31,20 +35,32 @@ class CreateTalk extends Component {
           floatingLabelText="Name"
           />
         <br />
-        <TextField
-          onChange={ e => { this.setState({ name: e.target.value})}}
+        <SelectField
           floatingLabelText="Speaker"
-          />
+          value={this.state.room}
+          onChange={this.handleRoom}>
+          {this.props.users.map( (item, index) => {
+            return (
+              <MenuItem value={index} primaryText={`${item.name}`} />
+            )
+          })}
+        </SelectField>
         <br />
         <TextField
           onChange={ e => { this.setState({ capacity: e.target.value})}}
           floatingLabelText="Capacity"
           />
           <br />
-        <TextField
-          onChange={ e => { this.setState({ capacity: e.target.value})}}
+        <SelectField
           floatingLabelText="Room"
-          />
+          value={this.state.room}
+          onChange={this.handleRoom}>
+          {this.props.rooms.map( (item, index) => {
+            return (
+              <MenuItem value={index} primaryText={`${item.name}`} />
+            )
+          })}
+        </SelectField>
         <br />
         <RaisedButton label="Create" onClick={this.handleClick}/>
       </div>
@@ -52,12 +68,12 @@ class CreateTalk extends Component {
   }
 }
 
-function mapStateToProps({ rooms }) { //weather = state.weather
-  return { rooms };
+function mapStateToProps({ rooms, users }) {
+  return { rooms, users };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchTalks}, dispatch);
+  return bindActionCreators({setTalk}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTalk);
