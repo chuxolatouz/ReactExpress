@@ -1,7 +1,6 @@
-import React, { PropTypes, Component } from 'react';
-import classnames from 'classnames';
-
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Link } from 'react-router'
 import './style.css';
 
 class App extends Component {
@@ -9,18 +8,29 @@ class App extends Component {
   // static defaultProps = {}
   // state = {}
 
+
   render() {
-    const { className, ...props } = this.props;
+
     return (
-      <div className={classnames('App', className)} {...props}>
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <MuiThemeProvider>
+
+
+        <div className="container">
+          <div className="text-center p-35">
+            <div className="row">
+              <Link to='/rooms'>
+                <div className="structure room col-md-4">Rooms</div>
+              </Link>
+              <Link to='/talks'>
+                <div className="structure talks col-md-4">Talks</div>
+              </Link>
+              <Link to='/users'>
+                <div className="structure users col-md-4">Users</div>
+              </Link>
+            </div>
+          </div>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
