@@ -12,7 +12,6 @@ export default function(state = [], action) {
       return [ action.payload , ...state ]
     case UPDATE_TALK:
       let talks = state.map( talk => {return (talk._id === action.payload._id ? action.payload : talk) })
-      console.log(talks);
       return talks
   }
   return state;

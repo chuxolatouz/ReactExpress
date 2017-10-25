@@ -90,10 +90,10 @@ class CreateTalk extends Component {
         <DatePicker hintText="Talk Date" onChange={this.handleDate}/>
         <br />
         <div className="row">
-          <div className="col-xs-6">
-            <Button link_to="/users"  label="Back"/>
+          <div className="col-xs-6 right">
+            <Button link_to="/talks"  label="Back"/>
           </div>
-          <div className="col-xs-6">
+          <div className="col-xs-6 left">
             <RaisedButton label="Create" onClick={this.handleClick}/>
           </div>
         </div>

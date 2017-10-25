@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { TextField, RaisedButton } from 'material-ui'
 import { setRoom } from '../../actions/index';
+import Button from '../Buttons'
 
 import './style.css';
 
@@ -39,7 +40,14 @@ class CreateRoom extends Component {
           floatingLabelText="Capacity"
           />
         <br />
-        <RaisedButton label="Create" onClick={this.handleClick}/>
+          <div className="row">
+            <div className="col-xs-6 right">
+              <Button link_to="/rooms"  label="Back"/>
+            </div>
+            <div className="col-xs-6 left">
+              <RaisedButton label="Create" onClick={this.handleClick}/>
+            </div>
+          </div>
       </div>
     );
   }

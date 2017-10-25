@@ -6,7 +6,7 @@ export const SET_ROOM = 'SET_ROOM'
 export const SET_TALK = 'SET_TALK'
 export const SET_USER = 'SET_USER'
 export const UPDATE_TALK = 'UPDATE_TALK'
-
+export const FETCH_LOGIN = 'FETCH_LOGIN'
 
 export async function fetchRooms() {
   const response = await axios.get('http://localhost:4000/rooms')
@@ -68,6 +68,19 @@ export async function updateTalk(data){
   const response = await axios.put(`http://localhost:4000/talks/${data._id}`, data)
   return {
     type: UPDATE_TALK,
+    payload: response.data
+  }
+}
+
+export async function attemptLogin(data){
+  const response = await axios.post(`http://localhost:4000/login`, data).catch(err => {
+    return {
+      type: FETCH_LOGIN,
+      payload: err.response.data
+    }
+  })
+  return {
+    type: FETCH_LOGIN,
     payload: response.data
   }
 }

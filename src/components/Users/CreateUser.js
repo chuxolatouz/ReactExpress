@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { TextField, RaisedButton, MenuItem, SelectField } from 'material-ui'
 import { setUser } from '../../actions/index';
+import Button from '../Buttons'
 
 class CreateUser extends Component {
   constructor() {
@@ -81,7 +82,14 @@ class CreateUser extends Component {
         </SelectField>
 
         <br />
-        <RaisedButton label="Create" onClick={this.handleClick}/>
+          <div className="row">
+            <div className="col-xs-6 right">
+              <Button link_to="/users"  label="Back"/>
+            </div>
+            <div className="col-xs-6 left">
+              <RaisedButton label="Create" onClick={this.handleClick}/>
+            </div>
+          </div>
       </div>
     );
   }
