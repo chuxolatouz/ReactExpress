@@ -37,12 +37,11 @@ export default class AssignUser extends Component {
       <div>
         <RaisedButton label="Assign User" onClick={this.handleOpen} />
         <Dialog
-          title="Dialog With Actions"
+          title={this.props.talk.name}
           actions={actions}
           modal={true}
           open={this.state.open}
-        >
-        {this.props.talk.name}
+        >        
         <AddUser talk={this.props.talk}/>
         </Dialog>
       </div>

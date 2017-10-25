@@ -1,6 +1,7 @@
 import {
   FETCH_TALKS,
   SET_TALK,
+  UPDATE_TALK,
  } from '../actions/index';
 
 export default function(state = [], action) {
@@ -9,7 +10,10 @@ export default function(state = [], action) {
       return action.payload
     case SET_TALK:
       return [ action.payload , ...state ]
-
+    case UPDATE_TALK:
+      let talks = state.map( talk => {return (talk._id === action.payload._id ? action.payload : talk) })
+      console.log(talks);
+      return talks
   }
   return state;
 }

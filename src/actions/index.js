@@ -5,6 +5,7 @@ export const FETCH_TALKS = 'FETCH_TALKS'
 export const SET_ROOM = 'SET_ROOM'
 export const SET_TALK = 'SET_TALK'
 export const SET_USER = 'SET_USER'
+export const UPDATE_TALK = 'UPDATE_TALK'
 
 
 export async function fetchRooms() {
@@ -60,5 +61,13 @@ export async function setTalk(data){
   return {
     type: SET_TALK,
     payload: response.data,
+  }
+}
+
+export async function updateTalk(data){
+  const response = await axios.put(`http://localhost:4000/talks/${data._id}`, data)
+  return {
+    type: UPDATE_TALK,
+    payload: response.data
   }
 }
