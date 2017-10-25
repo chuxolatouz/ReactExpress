@@ -20,20 +20,62 @@ class CreateTalk extends Component {
       capacity: 0,
       speaker: '',
       date: '',
+      room: '',
+      capacityError: '',
+      speakerError: '',
+      roomError: '',
+      nameError: '',
+      dateError: '',
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleRoom = this.handleRoom.bind(this)
     this.handleDate = this.handleDate.bind(this)
+    this.handleCapacity = this.handleCapacity.bind(this)
+    this.validate = this.validate.bind(this)
   }
   async componentWillMount() {
     await this.props.fetchUsers()
     await this.props.fetchRooms()
   }
 
-  handleClick(){
-    this.props.setTalk(this.state)
-    browserHistory.push({ pathname: '/talks'})
+  handleCapacity(){
+    debugger;
+    if(this.state.capacity <= 0 && this.state.capacity ) {
+
+    }
   }
+  validate(){
+    let valid = true
+    if(this.state.speaker === ''){
+      this.setState({ speakerError: 'Select valid Speaker' })
+      valid = false
+    }
+    if (this.state.room === '') {
+      this.setState({ roomError: 'Select valid Room' })
+      valid = false
+    }
+    if (this.state.capacity < 0) {
+      this.setState({ capacityError: 'Select Valid Capacity'})
+      valid = false
+    }
+    if (this.state.name === '') {
+      this.setState({ nameError: 'Required'})
+      valid = false
+    }
+    if (this.state.date === '') {
+      this.setState({ dateError: 'Required'})
+    }
+    return valid;
+
+  }
+
+  handleClick(){
+    if(this.validate()){
+      this.props.setTalk(this.state)
+      browserHistory.push({ pathname: '/talks'})
+    }
+  }
+
   handleSpeaker = (event,index,value) => {this.setState({speaker: value})}
   handleRoom = (event,index,value) => {this.setState({ room: value})}
 
@@ -51,11 +93,13 @@ class CreateTalk extends Component {
         <TextField
           onChange={ e => { this.setState({ name: e.target.value})}}
           floatingLabelText="Name"
+          errorText={this.state.nameError}
           />
         <br />
         <SelectField
           floatingLabelText="Speaker"
           value={this.state.speaker}
+          errorText={this.state.speakerError}
           onChange={this.handleSpeaker}>
           {this.props.users.map( (item, index) => {
             return (
@@ -70,11 +114,13 @@ class CreateTalk extends Component {
         <TextField
           onChange={ e => { this.setState({ capacity: e.target.value})}}
           floatingLabelText="Capacity"
+          errorText={this.state.capacityError}
           />
           <br />
         <SelectField
           floatingLabelText="Room"
           value={this.state.room}
+          errorText={this.state.roomError}
           style={{ textPosition: "left" }}
           onChange={this.handleRoom}>
           {this.props.rooms.map( (item, index) => {
@@ -87,7 +133,10 @@ class CreateTalk extends Component {
           })}
         </SelectField>
         <br />
-        <DatePicker hintText="Talk Date" onChange={this.handleDate}/>
+        <DatePicker hintText="Talk Date"
+          onChange={this.handleDate}
+          errorText={this.state.dateError}
+          />
         <br />
         <div className="row">
           <div className="col-xs-6 right">

@@ -20,7 +20,7 @@ class Talks extends Component {
   getUser(userId) {
     if(this.props.users.length){
       const user = this.props.users.find( x => x._id === userId)
-      return user.name
+      return user ? user.name : ''
     } else {
       return ''
     }
@@ -28,7 +28,7 @@ class Talks extends Component {
   getRoom(roomId) {
     if(this.props.rooms.length){
       const room = this.props.rooms.find( x => x._id === roomId)
-      return room.name
+      return room ? room.name : ''
     } else {
       return ''
     }
