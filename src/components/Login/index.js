@@ -22,6 +22,7 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(!isEmpty(nextProps.login)){
+      sessionStorage.setItem('auth', true)
       browserHistory.push({pathname: '/'})
     } else {
       this.setState({

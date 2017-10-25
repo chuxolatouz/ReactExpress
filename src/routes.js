@@ -14,17 +14,25 @@ import CreateRoom from './components/Rooms/CreateRoom'
 import CreateTalk from './components/Talks/CreateTalk'
 // import {requireAuthentication} from './components/Login/auth'
 
+function requireAuth(nextState, replace) {
+  if (!sessionStorage.getItem('auth')) {
+    replace({
+      pathname: '/login'
+    })
+  }
+}
+
 const Routes = (props) => (
   <Router {...props}>
-    <Route path="/login" component={Login}/>
-    <Route path="/" component={App} />
+    <Route path="/login" component={Login} />
+    <Route path="/" component={App} onEnter={requireAuth}/>
     <Route path="/about" component={About} />
-    <Route path="/rooms" component={Rooms} />
-    <Route path="/create_room" component={CreateRoom} />
-    <Route path="/talks" component={Talks} />
-    <Route path="/create_talk" component={CreateTalk} />
-    <Route path="/create_user" component={CreateUser} />
-    <Route path="/users" component={Users} />
+    <Route path="/rooms" component={Rooms} onEnter={requireAuth} />
+    <Route path="/create_room" component={CreateRoom} onEnter={requireAuth} />
+    <Route path="/talks" component={Talks} onEnter={requireAuth} />
+    <Route path="/create_talk" component={CreateTalk} onEnter={requireAuth} />
+    <Route path="/create_user" component={CreateUser} onEnter={requireAuth} />
+    <Route path="/users" component={Users} onEnter={requireAuth} />
     <Route path="*" component={NotFound} />
   </Router>
 );
